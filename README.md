@@ -16,10 +16,10 @@ Vue.component('chunLei-modal',chunLeiModal);
 
 ~~~
 <template>
-	<view class="content">
-		<chunLei-modal v-model="value" :mData="data" :type="type" @onConfirm="onConfirm" @onCancel="onCancel" navMask>
-		</chunLei-modal>
-	</view>
+  <view class="content">
+    <chunLei-modal v-model="value" :mData="data" :type="type" @onConfirm="onConfirm" @onCancel="onCancel" navMask>
+    </chunLei-modal>
+  </view>
 </template>
 ~~~
 
@@ -38,22 +38,22 @@ Vue.component('chunLei-modal',chunLeiModal);
 
 ~~~
 defaultData:{title:'提示',content:'这是一个模态弹窗',cancelText:'cancel',confirmColor:'#3CC51F'},
-				selectData:[{title:'拍摄',content:'照片或视频',icon:'../../static/shoot.png'},{title:'从照片选择'}],
-				advertData:{src:'../../static/advert.jpg',width:'600rpx',height:'350rpx'},
-				shareData:[
-					{title:'朋友圈',icon:'../../static/pengyouquan.png'},
-					{title:'微信好友',icon:'../../static/weixinhaoyou.png'},
-					{title:'微博',icon:'../../static/weibo.png'},
-					{title:'QQ好友',icon:'../../static/QQhaoyou.png'},
-					{title:'QQ空间',icon:'../../static/QQkongjian.png'},
-				],
-				inputData:{
-					title:'登录',
-					content:[
-						{title:'手机号',content:'',type:'number',placeholder:'请输入手机号'},
-						{title:'密码',content:'',type:'password',placeholder:'请输入密码'},
-					]
-				}
+selectData:[{title:'拍摄',content:'照片或视频',icon:'../../static/shoot.png'},{title:'从照片选择'}],
+advertData:{src:'../../static/advert.jpg',width:'600rpx',height:'350rpx'},
+shareData:[
+  {title:'朋友圈',icon:'../../static/pengyouquan.png'},
+  {title:'微信好友',icon:'../../static/weixinhaoyou.png'},
+  {title:'微博',icon:'../../static/weibo.png'},
+  {title:'QQ好友',icon:'../../static/QQhaoyou.png'},
+  {title:'QQ空间',icon:'../../static/QQkongjian.png'}
+ ],
+inputData:{
+  title:'登录',
+  content:[
+  {title:'手机号',content:'',type:'number',placeholder:'请输入手机号'},
+  {title:'密码',content:'',type:'password',placeholder:'请输入密码'}
+  ]
+}
 ~~~
 
 ## 事件
@@ -62,3 +62,5 @@ defaultData:{title:'提示',content:'这是一个模态弹窗',cancelText:'cance
 | ---  | --- |
 | confirm | 用户点击了确定按钮 |
 | cancel | 用户点击了取消按钮 |
+
+如果对您有帮助麻烦点个星星 [gitHub](https://15157757001/uniapp-modal)
