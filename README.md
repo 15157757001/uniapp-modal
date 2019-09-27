@@ -23,6 +23,17 @@ Vue.component('chunLei-modal',chunLeiModal);
 </template>
 ~~~
 
+## OBJECT参数说明
+
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| type | String | default | modal类型：default，select，advert，share，input，custom |
+| value | Boolean | false | 是否显示 |
+| maskEnable | Boolean | true | 是否点击遮罩退出 |
+| mData | Object, Array | Object | 数据 |
+| navMask | Boolean | 否 | 是否遮住导航栏 |
+| nav | Boolean | true | 该页面是否有导航栏，存在时遮住 |
+
 ## 事件
 
 | 事件名 | 说明 |
