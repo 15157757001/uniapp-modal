@@ -60,7 +60,7 @@ inputData:{
 
 | 事件名 | 说明 |
 | ---  | --- |
-| confirm | 用户点击了确定按钮 |
-| cancel | 用户点击了取消按钮 |
+| onConfirm | 用户点击了确定按钮 |
+| onCancel | 用户点击了取消按钮 |
 
 如果对您有帮助麻烦点个星星 [gitHub](https://github.com/15157757001/uniapp-modal)
