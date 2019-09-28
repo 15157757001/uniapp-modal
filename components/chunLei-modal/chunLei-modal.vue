@@ -98,13 +98,13 @@
 		},
 		data(){
 			return{
-				navView:null,
-				tabbarView:null
+				navList:[],
+				tabbarList:[]
 			}
 		},
 		mounted() {
 			//#ifdef APP-PLUS
-			this.creatPlusMask()
+			this.init()
 			//#endif
 		},
 		methods:{
@@ -124,7 +124,28 @@
 				if(!this.maskEnable) return
 				this.$emit('input',false)
 			},
-			async creatPlusMask(){
+			creatPlusMask(navHeight,tabbarHeight,opacity){
+				for (let i = 1; i <= 10; i++) {
+					let navView = new plus.nativeObj.View('nav',{top:'0px',left:'0px',height:`${navHeight}px`,width:'100%'});
+					navView.draw([
+						{tag:'rect',id:'rect',color:`rgba(0,0,0,0.1)`,position:{top:'0px',left:'0px',width:'100%',height:'100%'}},
+					]);
+					navView.addEventListener("click", (e) => {
+						this.tapMask()
+					}, false);
+					let tabbarView = new plus.nativeObj.View('tabbar',{bottom:'0px',left:'0px',height:`${tabbarHeight}px`,width:'100%'});
+					tabbarView.draw([
+						{tag:'rect',id:'rect',color:`rgba(0,0,0,0.1)`,position:{top:'0px',left:'0px',width:'100%',height:'100%'}},
+					]);
+					tabbarView.addEventListener("click", (e) => {
+						this.tapMask()
+					}, false);
+					this.navList.push(navView)
+					this.tabbarList.push(tabbarView)
+				}
+				
+			},
+			async init(){
 				let promise = new Promise((resolve,reject)=>{
 					uni.getSystemInfo({
 						success: function(e) {
@@ -136,25 +157,25 @@
 				})
 				let navHeight = await promise
 				navHeight = this.nav?navHeight:0
-				this.navView = new plus.nativeObj.View('nav',{top:'0px',left:'0px',height:`${navHeight}px`,width:'100%'});
-				this.navView.draw([
-					{tag:'rect',id:'rect',color:'rgba(0,0,0,0.6)',position:{top:'0px',left:'0px',width:'100%',height:'100%'}},
-				]);
-				this.navView.addEventListener("click", (e) => {
-					this.tapMask()
-				}, false);
 				let tabbarHeight = uni.getSystemInfoSync().screenHeight - uni.getSystemInfoSync().windowHeight - navHeight
-				this.tabbarView = new plus.nativeObj.View('tabbar',{bottom:'0px',left:'0px',height:`${tabbarHeight}px`,width:'100%'});
-				this.tabbarView.draw([
-					{tag:'rect',id:'rect',color:'rgba(0,0,0,0.6)',position:{top:'0px',left:'0px',width:'100%',height:'100%'}},
-				]);
-				this.tabbarView.addEventListener("click", (e) => {
-					this.tapMask()
-				}, false);
+				this.creatPlusMask(navHeight,tabbarHeight,0.6)
+				
+				
+				
 			},
-			animateView(){
-				// this.navView.animate({type:'shrink',frames:20,region:{top:'44px',bottom:'48px'}});
-				// this.tabbarView.animate({type:'shrink',frames:20,region:{top:'44px',bottom:'48px'}});
+			showPlusMask(){
+				let i = 0
+				const temp = setInterval(()=>{
+					if(i==9){
+						clearInterval(temp)
+					}else{
+						this.navList[i].show()
+						this.tabbarList[i].show()
+						// if(i!=0) this.navList[i-1].hide()
+						// if(i!=0) this.tabbarList[i-1].hide()
+						i++
+					}
+				},30)
 			}
 		},
 		watch:{
@@ -164,12 +185,18 @@
 					if(!this.navMask) return
 					//#ifdef APP-PLUS
 					if(newVal) {
-						this.navView.show();
-						this.tabbarView.show();
-						
+						// this.navView.show();
+						// this.tabbarView.show();
+						this.showPlusMask(0.6)
 					}else{
-						this.navView.hide();
-						this.tabbarView.hide();
+						for (let item of this.navList) {
+							item.hide();
+						}
+						for (let item of this.tabbarList) {
+							item.hide();
+						}
+						// this.navView.hide();
+						// this.tabbarView.hide();
 					}
 					//#endif
 				}
@@ -187,7 +214,7 @@
 		left: 0;
 		z-index: 9999;
 		background:rgba(0 ,0,0,0);
-		transition: background 0.3s ease-in-out;
+		transition: background 0.3s linear;
 		display: flex;
 		align-items: center;
 		opacity: 0;
