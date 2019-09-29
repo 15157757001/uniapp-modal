@@ -63,4 +63,4 @@ inputData:{
 | onConfirm | 用户点击了确定按钮 |
 | onCancel | 用户点击了取消按钮 |
 
-如果对您有帮助麻烦点个星星 [gitHub](https://github.com/15157757001/uniapp-modal)
+如果觉得插件不错，麻烦给个Star [gitHub](https://github.com/15157757001/uniapp-modal)
