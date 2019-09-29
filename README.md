@@ -14,14 +14,14 @@ Vue.component('chunLei-modal',chunLeiModal);
 
 **在index.vue中**  
 
-
+~~~
 <template>
   <view class="content">
     <chunLei-modal v-model="value" :mData="data" :type="type" @onConfirm="onConfirm" @onCancel="onCancel" navMask>
     </chunLei-modal>
   </view>
 </template>
-
+~~~
 
 ## OBJECT参数说明
 
@@ -61,6 +61,6 @@ inputData:{
 | 事件名 | 说明 |
 | ---  | --- |
 | onConfirm | 用户点击了确定按钮 |
-| 'onCancel' | 用户点击了取消按钮 |
+| onCancel | 用户点击了取消按钮 |
 
 如果觉得插件不错，麻烦给个Star [gitHub](https://github.com/15157757001/uniapp-modal)
