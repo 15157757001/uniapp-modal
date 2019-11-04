@@ -1,7 +1,8 @@
 <template>
 	<view class="content">
 		<button @tap="tapBtn('default')">默认</button>
-		<button @tap="tapBtn('select')">选择</button>
+		<button @tap="tapBtn('select')">单选</button>
+		<button @tap="tapBtn('multiSelect')">多选</button>
 		<button @tap="tapBtn('advert')">广告</button>
 		<button @tap="tapBtn('share')">分享</button>
 		<button @tap="tapBtn('input')">输入框</button>
@@ -31,6 +32,7 @@
 				data:{},
 				defaultData:{title:'提示',content:'这是一个模态弹窗',cancelText:'cancel',confirmColor:'#3CC51F'},
 				selectData:[{title:'拍摄',content:'照片或视频',icon:'../../static/shoot.png'},{title:'从照片选择'}],
+				multiSelectData:[{title:'拍摄',icon:'../../static/shoot.png',radioColor:'red',flag:false},{title:'从照片选择',flag:true}],
 				advertData:{src:'../../static/advert.jpg',width:'600rpx',height:'350rpx'},
 				shareData:[
 					{title:'朋友圈',icon:'../../static/pengyouquan.png'},
@@ -73,6 +75,9 @@
 					case 'input':
 						console.log(e)
 						break;
+					case 'multiSelect':
+						console.log(e)
+						break;
 				}
 			},
 			onCancel(){
@@ -96,6 +101,9 @@
 						break;
 					case 'input':
 						this.data = this.inputData
+						break;
+					case 'multiSelect':
+						this.data = this.multiSelectData
 						break;
 				}
 			}

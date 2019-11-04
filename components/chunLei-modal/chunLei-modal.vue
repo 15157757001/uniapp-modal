@@ -18,6 +18,16 @@
 				</view>
 			</view>
 		</block>
+		<block v-if="type=='multiSelect'">
+			<view class="select-view" @tap.stop>
+				<view v-for="(item,index) in mData" :key="index" class="select-box" @tap="tapSelect(item)">
+					<view><image :src="item.icon" v-if="item.icon"></image>{{item.title}}</view>
+					<view class="content">
+						<radio :color="item.radioColor?item.radioColor:'#001AFF'" :checked="item.flag?true:false"></radio>
+					</view>
+				</view>
+			</view>
+		</block>
 		<block v-if="type=='advert'">
 			<view class="advert-view">
 				<image :src="mData.src" class="confirm" @tap.stop="tapConfirm" :style="{width:mData.width?mData.width:'500rpx',height:mData.height?mData.height:'700rpx'}"></image>
@@ -108,6 +118,9 @@
 			//#endif
 		},
 		methods:{
+			tapSelect(item){
+				item.flag = !item.flag
+			},
 			inputConfirm(){
 				this.$emit('onConfirm',this.mData.content)
 				this.$emit('input',false)
@@ -122,7 +135,9 @@
 			},
 			tapMask(){
 				if(!this.maskEnable) return
+				this.$emit('onConfirm',this.mData)
 				this.$emit('input',false)
+
 			},
 			creatPlusMask(navHeight,tabbarHeight,opacity){
 				for (let i = 1; i <= 10; i++) {
