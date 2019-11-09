@@ -17,7 +17,7 @@ Vue.component('chunLei-modal',chunLeiModal);
 ~~~
 <template>
   <view class="content">
-    <chunLei-modal v-model="value" :mData="data" :type="type" @onConfirm="onConfirm" @onCancel="onCancel" navMask>
+    <chunLei-modal v-model="value" :mData="data" :type="type" @onConfirm="onConfirm" @cancel="cancel" navMask>
     </chunLei-modal>
   </view>
 </template>
@@ -40,6 +40,10 @@ Vue.component('chunLei-modal',chunLeiModal);
 defaultData:{title:'提示',content:'这是一个模态弹窗',cancelText:'cancel',confirmColor:'#3CC51F'},
 selectData:[{title:'拍摄',content:'照片或视频',icon:'../../static/shoot.png'},{title:'从照片选择'}],
 advertData:{src:'../../static/advert.jpg',width:'600rpx',height:'350rpx'},
+notifyData:{	
+					//title:'呵护未成年健康成长',
+					src:'../../static/notify.jpg',cancelText:'我知道了',cancelColor:'#FB7299',
+					content:'为呵护未成年健康成长,xx推出儿童/青少年模式。该模式下部分功能无法正常使用。请监护人主动选择，并设置监护密码。《儿童/青少年使用须知》详情'},
 shareData:[
   {title:'朋友圈',icon:'../../static/pengyouquan.png'},
   {title:'微信好友',icon:'../../static/weixinhaoyou.png'},
@@ -61,6 +65,6 @@ inputData:{
 | 事件名 | 说明 |
 | ---  | --- |
 | onConfirm | 用户点击了确定按钮 |
-| onCancel | 用户点击了取消按钮 |
+| cancel | 用户点击了取消按钮 |
 
 如果觉得插件不错，麻烦给个Star [gitHub](https://github.com/15157757001/uniapp-modal)
