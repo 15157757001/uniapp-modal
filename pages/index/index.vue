@@ -69,13 +69,13 @@
 						uni.showToast({title:'确认',icon:'none'})
 						break;
 					case 'select':
-						uni.showToast({title:e.title,icon:'none'})
+						uni.showToast({title:`${e.title}`,icon:'none'})
 						break;
 					case 'advert':
 						uni.showToast({title:'广告',icon:'none'})
 						break;
 					case 'share':
-						uni.showToast({title:e.title,icon:'none'})
+						uni.showToast({title:`${e.title}`,icon:'none'})
 						break;
 					case 'input':
 						console.log(e,'输入框')

@@ -14,18 +14,20 @@
 			<view class="select-view" @tap.stop>
 				<view v-for="(item,index) in mData" :key="index" class="select-box" @tap="tapConfirm(item)">
 					<view><image :src="item.icon" v-if="item.icon"></image>{{item.title}}</view>
-					<view class="content">{{item.content}}</view>
+					<view class="select-content">{{item.content}}</view>
 				</view>
 			</view>
 		</block>
 		<block v-if="type=='multiSelect'">
 			<view class="select-view" @tap.stop>
-				<view v-for="(item,index) in mData" :key="index" class="select-box" @tap="tapSelect(item)">
-					<view><image :src="item.icon" v-if="item.icon"></image>{{item.title}}</view>
-					<view class="content">
-						<radio :color="item.radioColor?item.radioColor:'#001AFF'" :checked="item.flag?true:false"></radio>
+				<checkbox-group @change="checkboxChange">
+					<view v-for="(item,index) in mData" :key="index" class="select-box">
+						<view><image :src="item.icon" v-if="item.icon"></image>{{item.title}}</view>
+						<view class="select-content">
+							<checkbox :value="item.title" :color="item.radioColor?item.radioColor:'#001AFF'" :checked="item.flag"></checkbox>
+						</view>
 					</view>
-				</view>
+				</checkbox-group>
 			</view>
 		</block>
 		<block v-if="type=='advert'">
@@ -126,8 +128,18 @@
 			//#endif
 		},
 		methods:{
-			tapSelect(item){
-				item.flag = !item.flag
+			checkboxChange(e){
+				var items = this.mData,
+				values = e.detail.value;
+				for (var i = 0, lenI = items.length; i < lenI; ++i) {
+				    const item = items[i]
+				    if(values.includes(item.title)){
+				        this.$set(item,'flag',true)
+				    }else{
+                        this.$set(item,'flag',false)
+                    }
+				}
+				
 			},
 			inputConfirm(){
 				this.$emit('onConfirm',this.mData.content)
@@ -143,7 +155,12 @@
 			},
 			tapMask(){
 				if(!this.maskEnable) return
-				this.$emit('onConfirm',this.mData)
+				if(this.type == 'multiSelect'){
+					this.$emit('onConfirm',this.mData)
+				}else{
+					this.$emit('cancel',this.mData)
+				}
+				
 				this.$emit('input',false)
 
 			},
@@ -306,7 +323,7 @@
 			justify-content: space-between;
 			align-items: center;
 			border-bottom: 0.5px solid #ddd;
-			.content{
+			.select-content{
 				color: #aaa;
 				font-size: 12px;
 			}
