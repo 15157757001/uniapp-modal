@@ -36,7 +36,7 @@ Vue.component('chunLei-modal',chunLeiModal);
 | value | Boolean | false | 是否显示 |
 | maskEnable | Boolean | true | 是否点击遮罩退出 |
 | mData | Object, Array | Object | 数据 |
-| navMask | Boolean | 否 | 是否遮住原生导航栏(顶部和tabbar) |
+| navMask | Boolean | false | 是否遮住原生导航栏(顶部和tabbar) |
 | nav | Boolean | true | 该页面是否有原生顶部导航栏。true遮住顶部和tabbar，false遮住底部 |
 
 **mData数据示例**  
