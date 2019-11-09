@@ -6,8 +6,9 @@
 		<button @tap="tapBtn('advert')">广告</button>
 		<button @tap="tapBtn('share')">分享</button>
 		<button @tap="tapBtn('input')">输入框</button>
+		<button @tap="tapBtn('notify')">通知</button>
 		<button @tap="tapBtn('custom')">自定义</button>
-		<chunLei-modal v-model="value" :mData="data" :type="type" @onConfirm="onConfirm" @onCancel="onCancel" navMask>
+		<chunLei-modal v-model="value" :mData="data" :type="type" @onConfirm="onConfirm" @cancel="cancel" navMask>
 			<div class="custom-view" @tap.stop>
 				<div class="hongbao">
 					<div class="top">该红包已超过24小时。如已领取,可在“红包记录”中查看</div>
@@ -34,6 +35,10 @@
 				selectData:[{title:'拍摄',content:'照片或视频',icon:'../../static/shoot.png'},{title:'从照片选择'}],
 				multiSelectData:[{title:'拍摄',icon:'../../static/shoot.png',radioColor:'red',flag:false},{title:'从照片选择',flag:true}],
 				advertData:{src:'../../static/advert.jpg',width:'600rpx',height:'350rpx'},
+				notifyData:{	
+					//title:'呵护未成年健康成长',
+					src:'../../static/notify.jpg',cancelText:'我知道了',cancelColor:'#FB7299',
+					content:'为呵护未成年健康成长,xx推出儿童/青少年模式。该模式下部分功能无法正常使用。请监护人主动选择，并设置监护密码。《儿童/青少年使用须知》详情'},
 				shareData:[
 					{title:'朋友圈',icon:'../../static/pengyouquan.png'},
 					{title:'微信好友',icon:'../../static/weixinhaoyou.png'},
@@ -73,14 +78,14 @@
 						uni.showToast({title:e.title,icon:'none'})
 						break;
 					case 'input':
-						console.log(e)
+						console.log(e,'输入框')
 						break;
 					case 'multiSelect':
-						console.log(e)
+						console.log(e,'多选')
 						break;
 				}
 			},
-			onCancel(){
+			cancel(){
 				uni.showToast({title:'取消',icon:'none'})
 			},
 			tapBtn(type){
@@ -104,6 +109,9 @@
 						break;
 					case 'multiSelect':
 						this.data = this.multiSelectData
+						break;
+					case 'notify':
+						this.data = this.notifyData
 						break;
 				}
 			}

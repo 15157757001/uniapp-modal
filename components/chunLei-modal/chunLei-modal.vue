@@ -34,6 +34,14 @@
 				<image class="cancel" @tap.stop="tapCancel" src="../../static/chunLei-modal/close.png"></image>
 			</view>
 		</block>
+		<block v-if="type=='notify'">
+			<view class="notify-view">
+				<view class="title" v-if="mData.title">{{mData.title}}</view>
+				<image :src="mData.src" v-if="mData.src"></image>
+				<view class="content word-break">{{mData.content}}</view>
+				<view class="cancel" @tap="tapCancel" :style="{color:mData.cancelColor?mData.cancelColor:''}">{{mData.cancelText?mData.cancelText:'我知道了'}}</view>
+			</view>
+		</block>
 		<block v-if="type=='share'">
 			<view class="share-view" @tap.stop>
 				<view v-for="(item,index) in mData" :key="index" class="share-box" @tap="tapConfirm(item)">
@@ -126,7 +134,7 @@
 				this.$emit('input',false)
 			},
 			tapCancel(){
-				this.$emit('onCancel')
+				this.$emit('cancel')
 				this.$emit('input',false)
 			},
 			tapConfirm(item){
@@ -313,6 +321,37 @@
 	}
 	.select-view .select-box:last-child{
 		border: none;
+	}
+	.notify-view{
+		width: 600rpx;
+		background-color: #fff;
+		border-radius: 6rpx;
+		image{
+			width: 600rpx;
+			height: 150rpx;
+		}
+		.title{
+			height: 100rpx;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.content{
+			padding: 40rpx 48rpx;
+			min-height: 40px;
+			font-size: 15px;
+			line-height: 1.4;
+			color: #999;
+			text-align: center;
+		}
+		.cancel{
+			height: 100rpx;
+			display: flex;
+			flex: 1;
+			justify-content: center;
+			align-items: center;
+			border-top:1px solid #E7E7E7;
+		}
 	}
 	.advert-view{
 		overflow: hidden;
