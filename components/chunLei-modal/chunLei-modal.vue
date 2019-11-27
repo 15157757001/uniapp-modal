@@ -209,8 +209,8 @@
 					if(i==9){
 						clearInterval(temp)
 					}else{
-						this.navList[i].show()
-						this.tabbarList[i].show()
+						if (this.navList[i]) this.navList[i].show()
+						if (this.tabbarList[i]) this.tabbarList[i].show()
 						// if(i!=0) this.navList[i-1].hide()
 						// if(i!=0) this.tabbarList[i-1].hide()
 						i++
