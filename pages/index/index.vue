@@ -78,11 +78,14 @@
 						uni.showToast({title:`${e.title}`,icon:'none'})
 						break;
 					case 'input':
-						console.log(e,'输入框')
+						for (let item of e) {
+							console.log(item.content,'输入框')
+						}
+
 						//清空数据
 						for (let item of this.inputData.content) {
-						    item.content = ''  
-						}  
+							item.content = ''  
+						}
 						break;
 					case 'multiSelect':
 						console.log(e,'多选')
