@@ -13,7 +13,7 @@
 		<block v-if="type=='select'">
 			<view class="select-view" @tap.stop>
 				<view v-for="(item,index) in mData" :key="index" class="select-box" @tap="tapConfirm(item)">
-					<view><image :src="item.icon" v-if="item.icon"></image>{{item.title}}</view>
+					<view><image class="image" :src="item.icon" v-if="item.icon"></image>{{item.title}}</view>
 					<view class="select-content">{{item.content}}</view>
 				</view>
 			</view>
@@ -22,7 +22,7 @@
 			<view class="select-view" @tap.stop>
 				<checkbox-group @change="checkboxChange">
 					<view v-for="(item,index) in mData" :key="index" class="select-box">
-						<view><image :src="item.icon" v-if="item.icon"></image>{{item.title}}</view>
+						<view><image class="image" :src="item.icon" v-if="item.icon"></image>{{item.title}}</view>
 						<view class="select-content">
 							<checkbox :value="item.title" :color="item.radioColor?item.radioColor:'#001AFF'" :checked="item.flag"></checkbox>
 						</view>
@@ -32,14 +32,14 @@
 		</block>
 		<block v-if="type=='advert'">
 			<view class="advert-view">
-				<image :src="mData.src" class="confirm" @tap.stop="tapConfirm" :style="{width:mData.width?mData.width:'500rpx',height:mData.height?mData.height:'700rpx'}"></image>
-				<image class="cancel" @tap.stop="tapCancel" src="../../static/chunLei-modal/close.png"></image>
+				<image :src="mData.src" class="image confirm" @tap.stop="tapConfirm" :style="{width:mData.width?mData.width:'500rpx',height:mData.height?mData.height:'700rpx'}"></image>
+				<image class="image cancel" @tap.stop="tapCancel" src="../../static/chunLei-modal/close.png"></image>
 			</view>
 		</block>
 		<block v-if="type=='notify'">
 			<view class="notify-view">
 				<view class="title" v-if="mData.title">{{mData.title}}</view>
-				<image :src="mData.src" v-if="mData.src"></image>
+				<image class="image" :src="mData.src" v-if="mData.src"></image>
 				<view class="content word-break">{{mData.content}}</view>
 				<view class="cancel" @tap="tapCancel" :style="{color:mData.cancelColor?mData.cancelColor:''}">{{mData.cancelText?mData.cancelText:'我知道了'}}</view>
 			</view>
@@ -47,30 +47,30 @@
 		<block v-if="type=='share'">
 			<view class="share-view" @tap.stop>
 				<view v-for="(item,index) in mData" :key="index" class="share-box" @tap="tapConfirm(item)">
-					<image :src="item.icon" v-if="item.icon"></image>{{item.title}}
+					<image class="image" :src="item.icon" v-if="item.icon"></image>{{item.title}}
 				</view>
 			</view>
 		</block>
-		<block v-if="type=='input'">
+		<block v-if="type=='input'&&value">
 			<view class="input-view" @tap.stop>
 				<view class="title">{{mData.title}}</view>
 				<view class="content">
 					<view v-for="(item,index) in mData.content" :key="index" class="input-box">
-						<view>{{item.title}}</view>
+						<view class="view">{{item.title}}</view>
 						<block v-if="item.type=='number'">
-							<input v-model="item.content" type="number" :password="item.type=='password'" :placeholder="item.placeholder"/>
+							<input class="input" v-model="item.content" type="number" :password="item.type=='password'" :placeholder="item.placeholder"/>
 						</block>
 						<block v-if="item.type=='password'">
-							<input v-model="item.content" :password="item.type=='password'" :placeholder="item.placeholder"/>
+							<input class="input" v-model="item.content" :password="item.type=='password'" :placeholder="item.placeholder"/>
 						</block>
 						<block v-if="item.type=='digit'">
-							<input v-model="item.content" type="digit" :password="item.type=='password'" :placeholder="item.placeholder"/>
+							<input class="input" v-model="item.content" type="digit" :password="item.type=='password'" :placeholder="item.placeholder"/>
 						</block>
 						<block v-if="item.type=='idcard'">
-							<input v-model="item.content" type="idcard" :password="item.type=='password'" :placeholder="item.placeholder"/>
+							<input class="input" v-model="item.content" type="idcard" :password="item.type=='password'" :placeholder="item.placeholder"/>
 						</block>
 						<block v-if="!item.type||item.type=='text'">
-							<input v-model="item.content" type="text" :password="item.type=='password'" :placeholder="item.placeholder"/>
+							<input class="input" v-model="item.content" type="text" :password="item.type=='password'" :placeholder="item.placeholder"/>
 						</block>
 					</view>
 				</view>
@@ -328,7 +328,7 @@
 				font-size: 12px;
 			}
 		}
-		image{
+		.image{
 			display: inline-block;
 			vertical-align: middle;
 			width: 40rpx;
@@ -343,7 +343,7 @@
 		width: 600rpx;
 		background-color: #fff;
 		border-radius: 6rpx;
-		image{
+		.image{
 			width: 600rpx;
 			height: 150rpx;
 		}
@@ -404,7 +404,7 @@
 			width: 33.33%;
 			padding: 40rpx 0;
 		}
-		image{
+		.image{
 			width: 80rpx;
 			height: 80rpx;
 			margin-bottom: 20rpx;
@@ -433,11 +433,11 @@
 		.input-box{
 			display: flex;
 			margin-bottom: 20rpx;
-			view{
+			.view{
 				margin-right: 20rpx;
 				min-width: 150rpx;
 			}
-			input{
+			.input{
 				
 				font-size: 18px;
 			}
