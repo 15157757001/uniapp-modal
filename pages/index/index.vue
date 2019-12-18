@@ -78,10 +78,11 @@
 						uni.showToast({title:`${e.title}`,icon:'none'})
 						break;
 					case 'input':
+						let title = ''
 						for (let item of e) {
-							console.log(item.content,'输入框')
+							title = title +item.title + item.content
 						}
-
+						uni.showToast({title:`${title}`,icon:'none'})
 						//清空数据
 						for (let item of this.inputData.content) {
 							item.content = ''  
