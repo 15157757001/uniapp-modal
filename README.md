@@ -1,6 +1,6 @@
 # uniapp-modal
 
-几种常用类型，自定义modal，覆盖原生导航栏
+几种常用类型，自定义modal，js独立覆盖原生导航栏
 
 ## 功能
 modal类型：默认（default）， 单选（select），广告（advert），
@@ -26,6 +26,15 @@ Vue.component('chunLei-modal',chunLeiModal);
     </chunLei-modal>
   </view>
 </template>
+~~~
+
+**tabMask使用方法**  
+
+~~~
+import TabMask from '@/components/chunLei-modal/tabMask'
+this.tabMask = new TabMask({opacity:0.6})
+this.tabMask.show(300)
+this.tabMask.hide()
 ~~~
 
 ## OBJECT参数说明
