@@ -1,5 +1,5 @@
 <template>
-	<view class="mask" @tap="tapMask" :class="!value?'':'mask-show'" @touchmove.stop.prevent>
+	<view class="mask" @tap="tapMask" :style="{backgroundColor:value?`rgba(0,0,0,${opacity})`:'rgba(0,0,0,0)'}" :class="!value?'':'mask-show'" @touchmove.stop.prevent>
 		<block v-if="type=='default'">
 			<view class="default-view" @tap.stop>
 				<view class="title">{{mData.title}}</view>
@@ -114,7 +114,11 @@
 			navHeight:{
 				type:Number,
 				default:null
-			}
+			},
+			opacity:{
+				type:Number,
+				default:0.6
+			},
 		},
 		data(){
 			return{
@@ -127,7 +131,7 @@
 			this.tabMask = new TabMask({
 				tabbarHeight:this.tabbarHeight,
 				navHeight:this.navHeight,
-				opacity:0.6,
+				opacity:this.opacity,
 				fn: this.tapMask
 			})
 			//#endif
@@ -196,7 +200,6 @@
 		bottom: 0;
 		left: 0;
 		z-index: 9999;
-		background:rgba(0 ,0,0,0);
 		transition: background 0.3s linear;
 		display: flex;
 		align-items: center;
@@ -204,7 +207,6 @@
 		visibility: hidden;
 		justify-content: center;
 		&.mask-show{
-			background:rgba(0,0,0,0.6);
 			visibility:visible;
 			opacity: 1;
 		}
