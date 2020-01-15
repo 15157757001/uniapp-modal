@@ -88,7 +88,7 @@
 </template>
 
 <script>
-	
+	import TabMask from './tabMask.js'
 	export default{
 		props:{
 			type:{
@@ -107,25 +107,31 @@
 				type:[Object, Array],
 				default:()=>{}
 			},
-			nav:{
-				type:Boolean,
-				default:true
+			tabbarHeight:{
+				type:Number,
+				default:null 
 			},
-			navMask:{
-				type:Boolean,
-				default:false
+			navHeight:{
+				type:Number,
+				default:null
 			}
 		},
 		data(){
 			return{
-				navList:[],
-				tabbarList:[]
+				tabMask:null
 			}
 		},
 		mounted() {
+
 			//#ifdef APP-PLUS
-			this.init()
+			this.tabMask = new TabMask({
+				tabbarHeight:this.tabbarHeight,
+				navHeight:this.navHeight,
+				opacity:0.6,
+				fn: this.tapMask
+			})
 			//#endif
+			
 		},
 		methods:{
 			checkboxChange(e){
@@ -163,80 +169,17 @@
 				
 				this.$emit('input',false)
 
-			},
-			creatPlusMask(navHeight,tabbarHeight,opacity){
-				for (let i = 1; i <= 10; i++) {
-					let navView = new plus.nativeObj.View('nav',{top:'0px',left:'0px',height:`${navHeight}px`,width:'100%'});
-					navView.draw([
-						{tag:'rect',id:'rect',color:`rgba(0,0,0,0.1)`,position:{top:'0px',left:'0px',width:'100%',height:'100%'}},
-					]);
-					navView.addEventListener("click", (e) => {
-						this.tapMask()
-					}, false);
-					let tabbarView = new plus.nativeObj.View('tabbar',{bottom:'0px',left:'0px',height:`${tabbarHeight}px`,width:'100%'});
-					tabbarView.draw([
-						{tag:'rect',id:'rect',color:`rgba(0,0,0,0.1)`,position:{top:'0px',left:'0px',width:'100%',height:'100%'}},
-					]);
-					tabbarView.addEventListener("click", (e) => {
-						this.tapMask()
-					}, false);
-					this.navList.push(navView)
-					this.tabbarList.push(tabbarView)
-				}
-				
-			},
-			async init(){
-				let promise = new Promise((resolve,reject)=>{
-					uni.getSystemInfo({
-						success: function(e) {
-							let customBar
-							customBar = e.statusBarHeight + 44;
-							resolve(customBar)
-						}
-					})
-				})
-				let navHeight = await promise
-				navHeight = this.nav?navHeight:0
-				let tabbarHeight = uni.getSystemInfoSync().screenHeight - uni.getSystemInfoSync().windowHeight - navHeight
-				this.creatPlusMask(navHeight,tabbarHeight,0.6)
-				
-				
-				
-			},
-			showPlusMask(){
-				let i = 0
-				const temp = setInterval(()=>{
-					if(i==9){
-						clearInterval(temp)
-					}else{
-						if (this.navList[i]) this.navList[i].show()
-						if (this.tabbarList[i]) this.tabbarList[i].show()
-						// if(i!=0) this.navList[i-1].hide()
-						// if(i!=0) this.tabbarList[i-1].hide()
-						i++
-					}
-				},30)
 			}
 		},
 		watch:{
 			value:{
 				immediate:true,
-				handler(newVal,oldVal){
-					if(!this.navMask) return
+				handler(newVal,oldVal){ 
 					//#ifdef APP-PLUS
 					if(newVal) {
-						// this.navView.show();
-						// this.tabbarView.show();
-						this.showPlusMask(0.6)
+						this.tabMask.show()
 					}else{
-						for (let item of this.navList) {
-							item.hide();
-						}
-						for (let item of this.tabbarList) {
-							item.hide();
-						}
-						// this.navView.hide();
-						// this.tabbarView.hide();
+						this.tabMask.hide()
 					}
 					//#endif
 				}

@@ -8,7 +8,7 @@
 		<button @tap="tapBtn('input')">输入框</button>
 		<button @tap="tapBtn('notify')">通知</button>
 		<button @tap="tapBtn('custom')">自定义</button>
-		<chunLei-modal v-model="value" :mData="data" :type="type" @onConfirm="onConfirm" @cancel="cancel" navMask>
+		<chunLei-modal v-model="value" :mData="data" :type="type" @onConfirm="onConfirm" @cancel="cancel" :navHeight="0">
 			<div class="custom-view" @tap.stop>
 				<div class="hongbao">
 					<div class="top">该红包已超过24小时。如已领取,可在“红包记录”中查看</div>
@@ -64,6 +64,7 @@
 		},
 		methods: {
 			onConfirm(e){
+				
 				switch(this.type){
 					case 'default':
 						uni.showToast({title:'确认',icon:'none'})
@@ -98,6 +99,7 @@
 				uni.showToast({title:'取消',icon:'none'})
 			},
 			tapBtn(type){
+				
 				this.type = type
 				this.value = !this.value
 				switch(this.type){
@@ -130,7 +132,7 @@
 
 <style lang="scss">
 	.content{
-		padding: 0 100rpx;
+		padding: 50rpx 100rpx;
 		
 	}
 	button{
@@ -138,7 +140,7 @@
 	}
 	.custom-view{
 		overflow: hidden;
-		
+		z-index: 999;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
