@@ -47,6 +47,7 @@ this.tabMask.hide()
 | mData | Object, Array | Object | 数据 |
 | tabbarHeight | Number | 50 | tabbar高度 |
 | navHeight | Number | 74 | nav高度 |
+| opacity | Number | 0.6 | 遮罩层透明度 |
 
 **mData数据示例**  
 
