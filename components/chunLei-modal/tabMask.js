@@ -40,8 +40,9 @@ export class TabMask{
 			{tag:'rect',id:'rect',color:`rgba(0,0,0,${opa})`,position:{top:'0px',left:'0px',width:'100%',height:'100%'}},
 		]);
 		view.addEventListener("click", (e) => {
-			this.fn()
-			this.hide()
+			
+			if(this.fn()) this.hide()
+			
 		}, false);
 		return view
 	}

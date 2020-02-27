@@ -8,7 +8,7 @@
 		<button @tap="tapBtn('input')">输入框</button>
 		<button @tap="tapBtn('notify')">通知</button>
 		<button @tap="tapBtn('custom')">自定义</button>
-		<chunLei-modal v-model="value" :mData="data" :type="type" @onConfirm="onConfirm" @cancel="cancel" :navHeight="0">
+		<chunLei-modal v-model="value" :maskEnable="false" :mData="data" :type="type" @onConfirm="onConfirm" @cancel="cancel" :navHeight="0">
 			<div class="custom-view" @tap.stop>
 				<div class="hongbao">
 					<div class="top">该红包已超过24小时。如已领取,可在“红包记录”中查看</div>

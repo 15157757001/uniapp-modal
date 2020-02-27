@@ -164,7 +164,8 @@
 				this.$emit('input',false)
 			},
 			tapMask(){
-				if(!this.maskEnable) return
+				
+				if(!this.maskEnable) return false
 				if(this.type == 'multiSelect'){
 					this.$emit('onConfirm',this.mData)
 				}else{
@@ -183,6 +184,7 @@
 					if(newVal) {
 						this.tabMask.show()
 					}else{
+						
 						this.tabMask.hide()
 					}
 					//#endif
