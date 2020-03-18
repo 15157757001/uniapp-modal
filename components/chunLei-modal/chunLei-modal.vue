@@ -178,7 +178,7 @@
 		},
 		watch:{
 			value:{
-				immediate:true,
+				//immediate:true,
 				handler(newVal,oldVal){ 
 					//#ifdef APP-PLUS
 					if(newVal) {
